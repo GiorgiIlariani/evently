@@ -140,8 +140,8 @@ export async function getOrdersByUser({ userId, limit = 3, page }: GetOrdersByUs
       })
 
     const ordersCount = await Order.distinct('event._id').countDocuments(conditions)
-
-    return { data: JSON.parse(JSON.stringify(orders)), totalPages: Math.ceil(ordersCount / limit) }
+    
+    return { data: JSON.parse(JSON.stringify(orders)), totalPages: Math.floor(ordersCount / limit) }
   } catch (error) {
     handleError(error)
   }
